@@ -12,7 +12,6 @@ import java.util.Collections;
 
 public class VarExtractor
 {
-
 	private File originFile;
 	private ArrayList<VarExtracted> varList;
 	private char separator = '=';
@@ -22,22 +21,48 @@ public class VarExtractor
 	private boolean defaultBoolean = false;
 	private String defaultString = null;
 
-	/**
-	 * <h1>varExtractor</h1> Extract a simple text file of variables into a list
-	 * that you can manage easily with our methods
-	 * <p>
-	 * <b>Note:</b> WIP
-	 *
-	 * @author
-	 * @version
-	 * @since
-	 */
-	public VarExtractor(File originFile)
-	{
-		this.originFile = originFile;
-		varList = new ArrayList<>();
-	}
+	// /**
+	// * <h1>varExtractor</h1>
+	// * <p>
+	// * Extract a simple text file of variables into a list that you can manage
+	// * easily with our methods
+	// * </p>
+	// *
+	// * @param originFile
+	// * The existing file witch will be used to manage variables. Only
+	// * use if you manage the file. Else use VarExtractor(String
+	// * originFile).
+	// * @author Ismael García Torres
+	// */
+	// public VarExtractor(File originFile)
+	// {
+	// this.originFile = originFile;
+	// varList = new ArrayList<>();
+	// }
 
+	/**
+	 * <h1>varExtractor</h1>
+	 * <p>
+	 * Extract a simple text file of variables into a list that you can manage
+	 * easily with our methods
+	 * </p>
+	 * <p>
+	 * Defaults:
+	 * <ul>
+	 * <li>defaultSeparator: '='</li>
+	 * <li>defaultInt: -1</li>
+	 * <li>defaultLong: -1</li>
+	 * <li>defaultFloat: -1.0</li>
+	 * <li>defaultBoolean: false</li>
+	 * <li>defaultString: null</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param originFile
+	 *            Path of the file. If file doesn't exist, then it creates a new
+	 *            one.
+	 * @author Ismael García Torres
+	 */
 	public VarExtractor(String originFile)
 	{
 		this.originFile = new File(originFile);
@@ -52,70 +77,135 @@ public class VarExtractor
 		varList = new ArrayList<>();
 	}
 
+	/**
+	 * <h1>varExtractor - getSeparator</h1>
+	 * <p>
+	 * Gets the default char separator between name and value of text file.
+	 * </p>
+	 * <p>
+	 * Default separator is '='.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public char getSeparator()
 	{
 		return separator;
 	}
 
-	public void setSeparator(char separador)
+	/**
+	 * <h1>varExtractor - setSeparator</h1>
+	 * <p>
+	 * Sets the default char separator between name and value of text file.
+	 * </p>
+	 * <p>
+	 * Default separator is '='.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
+	public void setSeparator(char separator)
 	{
-		this.separator = separador;
+		this.separator = separator;
 	}
 
-	public int getDefaultInt()
-	{
-		return defaultInt;
-	}
-
+	/**
+	 * <h1>varExtractor - setDefaultInt</h1>
+	 * <p>
+	 * Sets a different default int returned by getInt() if there is an error.
+	 * </p>
+	 * <p>
+	 * Default int is -1.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void setDefaultInt(int defaultInt)
 	{
 		this.defaultInt = defaultInt;
 	}
 
-	public long getDefaultLong()
-	{
-		return defaultLong;
-	}
-
+	/**
+	 * <h1>varExtractor - setDefaultLong</h1>
+	 * <p>
+	 * Sets a different default long returned by getLong() if there is an error.
+	 * </p>
+	 * <p>
+	 * Default long is -1.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void setDefaultLong(long defaultLong)
 	{
 		this.defaultLong = defaultLong;
 	}
 
-	public float getDefaultFloat()
-	{
-		return defaultFloat;
-	}
-
+	/**
+	 * <h1>varExtractor - setDefaultFloat</h1>
+	 * <p>
+	 * Sets a different default float returned by getFloat() if there is an
+	 * error.
+	 * </p>
+	 * <p>
+	 * Default float is -1.1
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void setDefaultFloat(float defaultFloat)
 	{
 		this.defaultFloat = defaultFloat;
 	}
 
-	public boolean getDefaultBoolean()
-	{
-		return defaultBoolean;
-	}
-
+	/**
+	 * <h1>varExtractor - setDefaultBoolean</h1>
+	 * <p>
+	 * Sets a different default boolean returned by getBoolean() if there is an
+	 * error.
+	 * </p>
+	 * <p>
+	 * Default boolean is false.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void setDefaultBoolean(boolean defaultBoolean)
 	{
 		this.defaultBoolean = defaultBoolean;
 	}
 
-	public String getDefaultString()
-	{
-		return defaultString;
-	}
-
+	/**
+	 * <h1>varExtractor - setDefaultString</h1>
+	 * <p>
+	 * Sets a different default String returned by getString() if there is an
+	 * error.
+	 * </p>
+	 * <p>
+	 * Default String is null.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void setDefaultString(String defaultString)
 	{
 		this.defaultString = defaultString;
 	}
 
-	// Loads the variables from file and generates introduce them into
-	// "varList" ArrayList<VarExtracted>
+	/**
+	 * <h1>varExtractor - loadVariables</h1>
+	 * <p>
+	 * Loads all variables from the text file to memory. The modifications
+	 * changes only in memory. To save them to the text file again, simply use
+	 * saveVariables().
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void loadVariables()
 	{
+		// Loads the variables from file and generates introduce them into
+		// "varList" ArrayList<VarExtracted>
 		varList.clear();
 		BufferedReader via = null;
 		try
@@ -128,12 +218,8 @@ public class VarExtractor
 				{
 					varList.add(new VarExtracted(line.substring(0, line.indexOf(separator)),
 							line.substring(line.indexOf(separator) + 1)));
-					/*
-					 * System.out.println(line.substring(0,
-					 * line.indexOf(separator)) + "=" +
-					 * line.substring(line.indexOf(separator) + 1,
-					 * line.length()));
-					 */
+					System.out.println("Loaded: " + line.substring(0, line.indexOf(separator)) + separator
+							+ line.substring(line.indexOf(separator) + 1, line.length()));
 				}
 			}
 		}
@@ -158,6 +244,14 @@ public class VarExtractor
 		}
 	}
 
+	/**
+	 * <h1>varExtractor - saveVariables</h1>
+	 * <p>
+	 * Save all the variables in memory to the text file, overwriting it.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void saveVariables()
 	{
 		PrintWriter writer = null;
@@ -195,6 +289,23 @@ public class VarExtractor
 		return null;
 	}
 
+	/**
+	 * <h1>varExtractor - getInt</h1>
+	 * <p>
+	 * Search the name of variable and return his int value.
+	 * </p>
+	 * <p>
+	 * If there is an error, it will return default int. To change default int,
+	 * use setDefaultInt().
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public int getInt(String name)
 	{
 		String value = getValueOf(name);
@@ -217,6 +328,23 @@ public class VarExtractor
 		}
 	}
 
+	/**
+	 * <h1>varExtractor - getLong</h1>
+	 * <p>
+	 * Search the name of variable and return his long value.
+	 * </p>
+	 * <p>
+	 * If there is an error, it will return default long. To change default
+	 * long, use setDefaultLong().
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public long getLong(String name)
 	{
 		String value = getValueOf(name);
@@ -239,7 +367,23 @@ public class VarExtractor
 		}
 	}
 
-	/** Gets float from preloaded list of variables */
+	/**
+	 * <h1>varExtractor - getFloat</h1>
+	 * <p>
+	 * Search the name of variable and return his float value.
+	 * </p>
+	 * <p>
+	 * If there is an error, it will return default float. To change default
+	 * float, use setDefaultFloat().
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public float getFloat(String name)
 	{
 		String value = getValueOf(name);
@@ -262,6 +406,23 @@ public class VarExtractor
 		}
 	}
 
+	/**
+	 * <h1>varExtractor - getBoolean</h1>
+	 * <p>
+	 * Search the name of variable and return his boolean value.
+	 * </p>
+	 * <p>
+	 * If there is an error, it will return default boolean. To change default
+	 * boolean, use setDefaultBoolean().
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public boolean getBoolean(String name)
 	{
 		String value = getValueOf(name);
@@ -288,6 +449,23 @@ public class VarExtractor
 		}
 	}
 
+	/**
+	 * <h1>varExtractor - getString</h1>
+	 * <p>
+	 * Search the name of variable and return his String value.
+	 * </p>
+	 * <p>
+	 * If there is an error, it will return default String. To change default
+	 * String, use setDefaultString().
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public String getString(String name)
 	{
 		String value = getValueOf(name);
@@ -321,21 +499,85 @@ public class VarExtractor
 		}
 	}
 
+	/**
+	 * <h1>varExtractor - setInt</h1>
+	 * <p>
+	 * Sets the value of named variable to the new int specified.
+	 * </p>
+	 * <p>
+	 * The variable must exist. To create a new variable, use addVariable().
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void setInt(String name, int value)
 	{
 		setValueOf(name, String.valueOf(value));
 	}
 
+	/**
+	 * <h1>varExtractor - setLong</h1>
+	 * <p>
+	 * Sets the value of named variable to the new long specified.
+	 * </p>
+	 * <p>
+	 * The variable must exist. To create a new variable, use addVariable().
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void setLong(String name, long value)
 	{
 		setValueOf(name, String.valueOf(value));
 	}
 
+	/**
+	 * <h1>varExtractor - setFloat</h1>
+	 * <p>
+	 * Sets the value of named variable to the new float specified.
+	 * </p>
+	 * <p>
+	 * The variable must exist. To create a new variable, use addVariable().
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void setFloat(String name, float value)
 	{
 		setValueOf(name, String.valueOf(value));
 	}
 
+	/**
+	 * <h1>varExtractor - setBoolean</h1>
+	 * <p>
+	 * Sets the value of named variable to the new boolean specified.
+	 * </p>
+	 * <p>
+	 * The variable must exist. To create a new variable, use addVariable().
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void setBoolean(String name, boolean value)
 	{
 		if (value == true)
@@ -348,16 +590,61 @@ public class VarExtractor
 		}
 	}
 
+	/**
+	 * <h1>varExtractor - setString</h1>
+	 * <p>
+	 * Sets the value of named variable to the new String specified.
+	 * </p>
+	 * <p>
+	 * The variable must exist. To create a new variable, use addVariable().
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void setString(String name, String value)
 	{
 		setValueOf(name, String.valueOf(value));
 	}
 
+	/**
+	 * <h1>varExtractor - addVariable</h1>
+	 * <p>
+	 * Adds a new variable with his value.
+	 * </p>
+	 * <p>
+	 * The variable type only depends when the variable is extracted.
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void addVariable(String name, String value)
 	{
 		varList.add(new VarExtracted(name, value));
 	}
 
+	/**
+	 * <h1>varExtractor - removeVariable</h1>
+	 * <p>
+	 * Search and removes all variables whose name is indicated.
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void removeVariable(String name)
 	{
 		for (int i = 0; i < varList.size(); i++)
@@ -369,6 +656,19 @@ public class VarExtractor
 		}
 	}
 
+	/**
+	 * <h1>varExtractor - sortVariables</h1>
+	 * <p>
+	 * Sort all variables by name.
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void sortVariables()
 	{
 		// I create a list of variables's name and I sort it
@@ -391,6 +691,14 @@ public class VarExtractor
 		varList = cacheList;
 	}
 
+	/**
+	 * <h1>varExtractor - testExistenceOf</h1>
+	 * <p>
+	 * Return true if searched name variable exists.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public boolean testExistenceOf(String name)
 	{
 		if (getValueOf(name) == null)
@@ -400,6 +708,14 @@ public class VarExtractor
 		return true;
 	}
 
+	/**
+	 * <h1>varExtractor - testDuplicates</h1>
+	 * <p>
+	 * Return true if there are duplicated name variables.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public boolean testDuplicates()
 	{
 		String nameCursor;
@@ -417,6 +733,20 @@ public class VarExtractor
 		return false;
 	}
 
+	/**
+	 * <h1>varExtractor - removeDuplicates</h1>
+	 * <p>
+	 * Remove all duplicate variables names and values. It keeps the first
+	 * duplicate founded.
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void removeDuplicates()
 	{
 		String nameCursor;
@@ -438,6 +768,19 @@ public class VarExtractor
 		}
 	}
 
+	/**
+	 * <h1>varExtractor - removeAllVariables</h1>
+	 * <p>
+	 * Remove all variables names and values.
+	 * </p>
+	 * <p>
+	 * Remember using loadVariables() to load all variables before start
+	 * managing variables. Then, you can use saveVariables() to save changes
+	 * into the text file.
+	 * </p>
+	 * 
+	 * @author Ismael García Torres
+	 */
 	public void removeAllVariables()
 	{
 		varList.clear();
